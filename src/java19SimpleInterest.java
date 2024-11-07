@@ -10,6 +10,7 @@ public class java19SimpleInterest
         Scanner sObj = new Scanner(System.in);
         boolean play = true;
 
+
         while(play)
         {
             System.out.println("How much would you like to invest? ($100 min.) or 'x' to exit: ");
