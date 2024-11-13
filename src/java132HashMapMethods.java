@@ -2,6 +2,7 @@
 //pgm desc: demonstrate setting up a HashMap (table) data structure and accessing it using its various methods
 import java.util.HashMap;
 import java.util.Map;         //use this library class method to iterate through the hashmap
+import java.util.Scanner;
 
 public class java132HashMapMethods {
     public static void main(String[] args) {
@@ -20,55 +21,87 @@ public class java132HashMapMethods {
         QBratings.put("RogerStaubach", 83.4);
         QBratings.put("SteveYoung", 96.8);
 
-        //display the hashMap
-        System.out.println("QB ratings: " + QBratings);
+        boolean play = true;
+        Scanner scObj = new Scanner(System.in);
+        String answer = new String();
 
-        //get the size of the HashMap
-        System.out.println("\n number of QuarterBacks: " + QBratings.size());
+        while (play) {
 
-        //accessing the key values using hte key data as an argument for the .get() method
-        System.out.println("\nDanMarino's rating: " + QBratings.get("DanMarino"));
+            //display the hashMap
+            System.out.println("QB ratings: " + QBratings);
+            String choice = "";
+            Double score = 0.0;
 
-        //check if  a key exists providing the key as an argument in the .containsKey() method
-        String QB = "JoeMontana";
+            System.out.println("Choose: 'add' 'update' 'find' 'remove' 'display all' 'clear all'");
+            answer = scObj.nextLine();
+            answer.toLowerCase();
 
-        if(QBratings.containsKey(QB)){
-            System.out.println(QB + " rating: " + QBratings.get(QB));
+            if (answer.equals("add")){
+                System.out.println("Type who you want to add: ");
+                choice = scObj.nextLine();
+
+                System.out.println("Type the score of the player " + choice);
+                score = scObj.nextDouble();
+
+                QBratings.put(choice, score);
+
+                scObj.nextLine();
+
+            }
+            else if(answer.equals("update")){
+                System.out.println("Type the player's score you want to update you want to update: ");
+                choice = scObj.nextLine();
+
+                System.out.println("Enter the updated score: ");
+                score = scObj.nextDouble();
+
+                QBratings.put(choice, score);
+
+                scObj.nextLine();
+
+            }
+            else if (answer.equals("find")){
+                System.out.println("Choose the person you want to see if they're in the database: ");
+                choice = scObj.nextLine();
+
+                if(QBratings.containsKey(choice)){
+                    System.out.println(choice + " has a rating of: " + QBratings.get(choice));
+
+                }
+                else{
+                    System.out.println(choice + " isn't in the database");
+                }
+                continue;
+            }
+            else if (answer.equals("remove")){
+                System.out.println("Choose the player you want to remove: ");
+
+                choice = scObj.nextLine();
+                QBratings.remove(choice);
+
+                continue;
+            }
+            else if (answer.equals("display all")){
+                for(Map.Entry<String, Double> entry : QBratings.entrySet()){
+                    System.out.println(entry.getKey() + " : " + entry.getValue());
+                }
+
+                scObj.nextLine();
+
+                continue;
+            }
+            else if (answer.equals("clear all")){
+                QBratings.clear();
+                System.out.println("After clearing: " + QBratings);
+
+                scObj.nextLine();
+
+                continue;
+            }
+            else{
+                System.out.println("Not an option");
+            }
         }
-        else{
-            System.out.println(QB + " is not in the database");
-        }
-
-        //updating a value
-        QBratings.put("TomBrady", 79.07);
-        System.out.println("TomBrady's updated rating: " + QBratings.get("TomBrady"));
-
-        //removing a key value pair or element providing the key as an argument in the .remove() method
-        QBratings.remove("SteveYoung");
-
-        //iterating through the hashmap
-        System.out.println("\n all the QB and ratings");
-
-        for(Map.Entry<String, Double> entry : QBratings.entrySet()){
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
-
-
-        //getting all the keys
-        System.out.println("\n ALL QBs: " + QBratings.keySet());
-
-        //getting all the values
-        System.out.println("All ratings: " + QBratings.values());
-
-        //getting size of the HashMap
-        System.out.println("\n number of QuarterBacks: " + QBratings.size());
-
-        //check if the hashmap is empty
-        System.out.println("is the hashmap empty?" + QBratings.isEmpty());
-
-        //clearing the hashmap
-        QBratings.clear();
-        System.out.println("\n After clearing: " + QBratings);
     }
 }
 //how on earth does git work ;-;
